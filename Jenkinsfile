@@ -49,11 +49,7 @@ pipeline {
 			sh '''
 			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
             kubectl get deployments
-			'''
-            sh '''
-			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
-            kubectl set image deployment/projectcapstone-deploy projectcapstone-pod=susmithasusmi13/kubernetes-clusters-demo:rollingupdate
-            kubectl rollout status deployment projectcapstone-deploy
+            kubectl get svc
 			'''
             sh '''
 			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
@@ -62,9 +58,9 @@ pipeline {
 			'''
             sh '''
             aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
+            kubectl get deployments
             kubectl get svc
             '''
-            }
             }
             }
             }
