@@ -43,5 +43,14 @@ pipeline {
                 input "Shall we proceed rolling the update?"
             }
             }
+            stage('Get pods') {
+            steps {
+                withAWS(credentials: 'aws-cred', region:'us-east-1') {
+			sh '''
+			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
+			kubectl get pods
+			'''
+            }
+            }
       }
 }
