@@ -40,7 +40,7 @@ pipeline {
             }
             stage('Proceed Updating') {
             steps {
-                input "Ready to redirect traffic to green?"
+                input "Shall we proceed rolling the update?"
             }
             }
       }
