@@ -40,7 +40,6 @@ pipeline {
             }
             stage('Proceed Updating') {
             steps {
-<<<<<<< HEAD
                 input "Shall we proceed rolling the update?"
             }
             }
@@ -49,8 +48,9 @@ pipeline {
                 withAWS(credentials: 'aws-cred', region:'us-east-1') {
 			sh '''
 			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
-            kubectl get deployments
+			kubectl get pods
             kubectl get svc
+            kubectl get deployements
 			'''
             sh '''
 			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
@@ -62,11 +62,6 @@ pipeline {
             kubectl get svc
             '''
             }
-||||||| constructed merge base
-                input "Ready to redirect traffic to green?"
-=======
-                input "Shall we proceed rolling the update?"
->>>>>>> Configured Rolling
             }
             }
             }
