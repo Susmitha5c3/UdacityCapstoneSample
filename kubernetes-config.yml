@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: projectcapstone
+spec:
+  type: LoadBalancer
+  selector:
+    app: projectcapstone
+  ports:
+  - port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectcapstone-deploy
+spec:
+  selector:
+    matchLabels:
+      app: projectcapstone
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: projectcapstone
+    spec:
+      containers:
+      - name: projectcapstone-pod
+        image: susmithasusmi13/kubernetes-clusters-demo:devopsprojectcapstone
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          protocol: TCP
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  minReadySeconds: 10
