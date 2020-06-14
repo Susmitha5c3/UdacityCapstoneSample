@@ -58,7 +58,6 @@ pipeline {
 			'''
             sh '''
             aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
-            kubectl get deployments
             kubectl get svc
             '''
             }
