@@ -48,9 +48,9 @@ pipeline {
                 withAWS(credentials: 'aws-cred', region:'us-east-1') {
 			sh '''
 			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
-			kubectl get pods
-            kubectl get svc
             kubectl get deployments
+            kubectl get pods
+            kubectl describe pod projectcapstone-deploy-7fdb874df9-5vrt5
 			'''
             }
             }
