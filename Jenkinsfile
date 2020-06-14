@@ -32,7 +32,7 @@ pipeline {
             steps {
                       withAWS(credentials: 'aws-cred', region:'us-east-1') {
 			sh '''
-			aws eks --region us-east-1 update-kubeconfig --name KubsCluster
+			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
 			kubectl apply -f ./kubernetes-config.yml
 			'''
                       }
