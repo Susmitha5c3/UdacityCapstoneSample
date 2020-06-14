@@ -43,18 +43,24 @@ pipeline {
                 input "Shall we proceed rolling the update?"
             }
             }
-            stage('Get pods') {
+            stage('Rolling Update') {
             steps {
                 withAWS(credentials: 'aws-cred', region:'us-east-1') {
 			sh '''
 			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
             kubectl get deployments
+            kubectl get svc
 			'''
             sh '''
 			aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
             kubectl set image deployment/projectcapstone-deploy projectcapstone-pod=susmithasusmi13/kubernetes-clusters-demo:rollingupdate
             kubectl rollout status deployment projectcapstone-deploy
 			'''
+            sh '''
+            aws eks --region us-east-1 update-kubeconfig --name KubernetesCluster
+            kubectl get deployments
+            kubectl get svc
+            '''
             }
             }
             }
